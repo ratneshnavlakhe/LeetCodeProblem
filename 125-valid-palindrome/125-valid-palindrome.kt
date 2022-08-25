@@ -1,25 +1,24 @@
 class Solution {
     fun isPalindrome(s: String): Boolean {
-        val palString = Regex("[^A-Za-z0-9]").replace(s, "").toLowerCase()
-        if (palString.length == 0) {
-            return true
-        }
-        if (palString.length % 2 == 1) {
-            val firstString = palString.take(palString.length / 2)
-            val lastString = palString.takeLast(palString.length / 2).reversed()
-            
-            if (firstString == lastString) {
-                return true
+       var i = 0
+        var j = s.length - 1
+        while (i < j) {
+            val start = s[i]
+            val end = s[j]
+            if (!Character.isLetterOrDigit(start)) {
+                i++
+                continue
             }
-            // println(palString.length / 2)
-        } else {
-            val firstString = palString.take(palString.length / 2)
-            val lastString = palString.takeLast(palString.length / 2).reversed()
-            
-            if (firstString == lastString) {
-                return true
+            if (!Character.isLetterOrDigit(end)) {
+                j--
+                continue
             }
+            if (start.toLowerCase() != end.toLowerCase()) {
+                return false
+            }
+            i++
+            j--
         }
-        return false
+        return true
     }
 }
